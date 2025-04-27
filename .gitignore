@@ -1,0 +1,25 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore virtual environment folder
+venv/
+.env/
+.history/
+
+# Ignore build and distribution files
+build/
+dist/
+Driver_Notes/
+*.egg-info/
+
+# Ignore the compiled executable created by PyInstaller
+*.exe
+
+# Optionally, you can ignore the WebDriver if you don't want to include it in the repo
+msedgedriver.exe
+
+# Ignore other system-specific files
+.DS_Store  # macOS
+Thumbs.db  # Windows
