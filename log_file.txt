@@ -1,0 +1,33 @@
+2025-05-02 13:22:40,999 [INFO] Application started.
+2025-05-02 13:22:45,043 [INFO] Application exited.
+2025-05-02 13:33:47,018 [INFO] Application started.
+2025-05-02 13:35:02,903 [INFO] Starting browser...
+2025-05-02 13:35:06,275 [INFO] Failed to start browser: Message: session not created: This version of Microsoft Edge WebDriver only supports Microsoft Edge version 134
+Current browser version is 136.0.3240.50 with binary path C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
+Stacktrace:
+	GetHandleVerifier [0x00007FF6A634A545+20677]
+	simdutf::get_active_implementation [0x00007FF6A62A6CF0+491296]
+	Microsoft::Applications::Events::EventProperty::to_string [0x00007FF6A659D75A+1807418]
+	(No symbol) [0x00007FF6A60D97F7]
+	(No symbol) [0x00007FF6A60D8C30]
+	(No symbol) [0x00007FF6A60D2FC9]
+	(No symbol) [0x00007FF6A60CFDD7]
+	(No symbol) [0x00007FF6A6113A99]
+	(No symbol) [0x00007FF6A61081C3]
+	(No symbol) [0x00007FF6A60DCC36]
+	(No symbol) [0x00007FF6A60DC0C4]
+	(No symbol) [0x00007FF6A60DCA63]
+	(No symbol) [0x00007FF6A61C5BDD]
+	(No symbol) [0x00007FF6A61D2042]
+	(No symbol) [0x00007FF6A61CAA03]
+	Microsoft::Applications::Events::EventProperty::to_string [0x00007FF6A64242AA+262026]
+	simdutf::get_active_implementation [0x00007FF6A62B4421+546385]
+	simdutf::get_active_implementation [0x00007FF6A62AD6D4+518404]
+	simdutf::get_active_implementation [0x00007FF6A62AD819+518729]
+	simdutf::get_active_implementation [0x00007FF6A629F3C6+460278]
+	BaseThreadInitThunk [0x00007FFCD2C7E8D7+23]
+	RtlUserThreadStart [0x00007FFCD3DF14FC+44]
+
+2025-05-02 13:35:43,694 [INFO] Application exited.
+2025-05-05 13:51:26,141 [INFO] Application started.
+2025-05-05 13:51:32,711 [INFO] Application exited.

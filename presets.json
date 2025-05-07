@@ -1,0 +1,15 @@
+[
+    {
+      "preset_name": "Team A",
+      "fields": {
+        "name": "#info-table tr:nth-child(1) td:last-child",
+        "account_number": "#info-table tr:nth-child(2) td:last-child",
+        "dob": "#info-table tr:nth-child(3) td:last-child"
+      },
+      "table": {
+        "selector": "#contact-table",
+        "columns": ["Type", "Value"]
+      }
+    }
+  ]
+  

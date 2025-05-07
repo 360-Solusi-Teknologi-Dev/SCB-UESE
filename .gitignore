@@ -16,6 +16,8 @@ Driver_Notes/
 
 # Ignore the compiled executable created by PyInstaller
 *.exe
+*.zip
+
 
 # Optionally, you can ignore the WebDriver if you don't want to include it in the repo
 msedgedriver.exe
