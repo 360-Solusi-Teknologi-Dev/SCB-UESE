@@ -1,15 +1,34 @@
 [
     {
-      "preset_name": "Team A",
-      "fields": {
-        "name": "#info-table tr:nth-child(1) td:last-child",
-        "account_number": "#info-table tr:nth-child(2) td:last-child",
-        "dob": "#info-table tr:nth-child(3) td:last-child"
-      },
-      "table": {
-        "selector": "#contact-table",
-        "columns": ["Type", "Value"]
-      }
+        "preset_name": "Team A",
+        "fields": {
+            "name": {
+                "type": "css",
+                "selector": "#info-table tr:nth-child(1) td:last-child"
+            },
+            "account_number": {
+                "type": "css",
+                "selector": "#info-table tr:nth-child(2) td:last-child"
+            },
+            "dob": {
+                "type": "css",
+                "selector": "#info-table tr:nth-child(3) td:last-child"
+            },
+            "phone_1": {
+                "type": "table_lookup",
+                "table_id": "contact-table",
+                "label": "Phone 1"
+            },
+            "address_1": {
+                "type": "table_lookup",
+                "table_id": "contact-table",
+                "label": "Address 1"
+            },
+            "phone_2": {
+                "type": "table_lookup",
+                "table_id": "contact-table",
+                "label": "Phone 2"
+            }
+        }
     }
-  ]
-  
+]
