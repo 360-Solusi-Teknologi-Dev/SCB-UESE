@@ -4,7 +4,7 @@
 a = Analysis(
     ['enquiry-scraping-selenium.py'],
     pathex=[],
-    binaries=[('msedgedriver.exe', '.')],
+    binaries=[('msedgedriver-135.exe', '.')],
     datas=[],
     hiddenimports=[],
     hookspath=[],

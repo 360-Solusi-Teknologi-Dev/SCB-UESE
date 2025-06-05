@@ -28,7 +28,26 @@
                 "type": "table_lookup",
                 "table_id": "contact-table",
                 "label": "Phone 2"
+            },
+            "link": {
+                "type": "css",
+                "selector": "#b_results > li.b_algo.b_vtl_deeplinks > h2 > a"
+            },
+            "button search": {
+                "type": "css",
+                "selector": "#search-form > fieldset > button"
             }
+            
         }
+    },
+    {
+        "preset_name": "Team B",
+        "fields": {
+            "Title": {
+                "type": "css",
+                "selector": "body > h2"
+            }
+        },
+        "table": {}
     }
 ]
