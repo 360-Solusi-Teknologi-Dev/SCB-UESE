@@ -16,7 +16,13 @@ class Scraper:
         self.driver = webdriver.Edge(service=service)  # Pass the service object
         self.driver.get(url)
         print("Opened:", url)
-
+        
+    def browse_file(self):
+        from PySide6.QtWidgets import QFileDialog
+        file_path, _ = QFileDialog.getOpenFileName(self, "Select File", "", "All Files (*.*)")
+        if file_path:
+            self.file_path_entry.setText(file_path)
+            
     def wait_for_new_window(self):
         original_window = self.driver.current_window_handle
         for _ in range(20):

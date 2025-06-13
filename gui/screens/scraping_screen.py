@@ -37,12 +37,23 @@ class ScrapingScreen(QWidget):
         self.url_entry = QLineEdit()
         self.team_combo = QComboBox()
         self.team_combo.addItems(presets.get_team_names())
-
+        
         # Interchangeable input layout for other screens
         form_layout = QFormLayout()
         form_layout.addRow("Web App URL:", self.url_entry)        # <-- Interchangeable: URL input
         form_layout.addRow("Team Preset:", self.team_combo)       # <-- Interchangeable: Team selector
 
+        # Input File browse
+        self.file_path_entry = QLineEdit()
+        self.file_path_entry.setReadOnly(True)
+        self.browse_button = QPushButton("Browse...")
+        self.browse_button.clicked.connect(self.browse_file)
+
+        file_layout = QHBoxLayout()
+        file_layout.addWidget(self.file_path_entry)
+        file_layout.addWidget(self.browse_button)
+        form_layout.addRow("Input File:", file_layout)
+        
         # === ACTION BUTTONS ===
         button_layout = QHBoxLayout()
         self.start_button = QPushButton("Start")
@@ -79,6 +90,12 @@ class ScrapingScreen(QWidget):
         self.team_combo.clear()
         self.team_combo.addItems(presets.get_team_names())
 
+    def browse_file(self):
+        from PySide6.QtWidgets import QFileDialog
+        file_path, _ = QFileDialog.getOpenFileName(self, "Select File", "", "All Files (*.*)")
+        if file_path:
+            self.file_path_entry.setText(file_path)
+    
     def start_browser(self):
         url = self.url_entry.text().strip()
         if not url:
