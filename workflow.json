@@ -1,0 +1,21 @@
+[
+  {
+    "team": "EUC",
+    "screen": "Relationship Individual",
+    "tab": "Tab 1",
+    "steps": [
+        { "action": "extract", "field": "name", "as": "Name" },
+        { "action": "extract", "field": "account_number", "as": "Account Number" }
+    ]
+  },
+  {
+    "team": "Test Team",
+    "screen": "Test Screen",
+    "tab": "Tab 1",
+    "steps": [
+        { "action": "switch_to_frame", "field": "iframe" },
+        { "action": "extract", "field": "name", "as": "Name" },
+        { "action": "extract", "field": "account_number", "as": "Account Number" }
+    ]
+  }
+]

@@ -1,53 +1,40 @@
-[
-    {
-        "preset_name": "Team A",
-        "fields": {
-            "name": {
-                "type": "css",
-                "selector": "#info-table tr:nth-child(1) td:last-child"
-            },
-            "account_number": {
-                "type": "css",
-                "selector": "#info-table tr:nth-child(2) td:last-child"
-            },
-            "dob": {
-                "type": "css",
-                "selector": "#info-table tr:nth-child(3) td:last-child"
-            },
-            "phone_1": {
-                "type": "table_lookup",
-                "table_id": "contact-table",
-                "label": "Phone 1"
-            },
-            "address_1": {
-                "type": "table_lookup",
-                "table_id": "contact-table",
-                "label": "Address 1"
-            },
-            "phone_2": {
-                "type": "table_lookup",
-                "table_id": "contact-table",
-                "label": "Phone 2"
-            },
-            "link": {
-                "type": "css",
-                "selector": "#b_results > li.b_algo.b_vtl_deeplinks > h2 > a"
-            },
-            "button search": {
-                "type": "css",
-                "selector": "#search-form > fieldset > button"
-            }
-            
-        }
-    },
-    {
-        "preset_name": "Team B",
-        "fields": {
-            "Title": {
-                "type": "css",
-                "selector": "body > h2"
-            }
+{
+  "EUC": {
+    "Relationship Individual": {
+      "Tab 1": {
+        "name": {
+          "type": "css",
+          "selector": "#info-table tr:nth-child(1) td:nth-child(2)"
         },
-        "table": {}
+        "account_number": {
+          "type": "css",
+          "selector": "#info-table tr:nth-child(2) td:nth-child(2)"
+        }
+      },
+      "Tab 2": {
+        "address": {
+          "type": "css",
+          "selector": "#contact-table tr:nth-child(3) td:nth-child(2)"
+        }
+      }
     }
-]
+  },
+  "Test Team": {
+    "Test Screen": {
+      "Tab 1": {
+        "iframe": {
+          "type": "css",
+          "selector": "#enqframe"
+        },
+        "name": {
+          "type": "css",
+          "selector": "#info-table > tbody > tr:nth-child(1) > td:nth-child(2)"
+        },
+        "account_number": {
+          "type": "css",
+          "selector": "#info-table > tbody > tr:nth-child(2) > td:nth-child(2)"
+        }
+      }
+    }
+  }
+}

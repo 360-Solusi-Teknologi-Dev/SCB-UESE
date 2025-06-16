@@ -64,6 +64,13 @@ class ScrapingScreen(QWidget):
         button_layout.addWidget(self.start_button)
         button_layout.addWidget(self.resume_button)
         button_layout.addWidget(self.reset_button)
+        
+        # Test Workflow button
+        self.test_button = QPushButton("Test Workflow")
+        self.test_button.setToolTip("Load the URL and test the selected team's workflow")
+        button_layout.addWidget(self.test_button)
+        self.test_button.clicked.connect(self.test_workflow)
+
 
         # GroupBox for visual grouping (optional but helps with modularity)
         input_group = QGroupBox("Scraping Configuration")  # <-- Interchangeable: Rename for other screens
@@ -131,6 +138,78 @@ class ScrapingScreen(QWidget):
             self.reset_app()
 
         threading.Thread(target=scrape_thread, daemon=True).start()
+        
+    def test_workflow(self):
+        url = self.url_entry.text().strip()
+        if not url:
+            QMessageBox.critical(self, "Input Error", "Please enter a valid URL.")
+            return
+        if not url.startswith("http://") and not url.startswith("https://"):
+            url = "http://" + url  # use http for local test
+
+        team = self.team_combo.currentText()
+        screen = "Test Screen"  # hardcoded for now, or use a dropdown later
+        tab = "Tab 1"
+
+        from core import presets
+        steps = presets.get_workflow(team, screen, tab)
+        preset_data = presets.load_presets()  # ✅ THIS LINE FIXES THE ERROR
+
+        print(f"Testing workflow for Team: '{team}', Screen: '{screen}', Tab: '{tab}'")
+        print(f"URL: {url}")
+        print(f"Loaded {len(steps)} workflow steps.")
+
+        if not steps:
+            QMessageBox.warning(self, "No Workflow", f"No workflow defined for team '{team}' / screen '{screen}' / tab '{tab}'.")
+            return
+
+        def test_thread():
+            print("Starting test thread...")
+            self.test_button.setEnabled(False)
+            print("Starting browser...")
+            self.scraper.start_browser(url)
+            self.scraper.driver.implicitly_wait(2)
+
+            from core.automation_runner import run_workflow
+            try:
+                results = run_workflow(
+                    driver=self.scraper.driver,
+                    workflow=steps,
+                    context={},
+                    presets=preset_data,  # ✅ PASS THE LOADED PRESETS HERE
+                    team=team,
+                    screen=screen,
+                    tab=tab
+                )
+                print("Workflow run completed, processing results...")
+                result_msg = "\n".join(f"{k}: {v}" for k, v in results.items())
+            except Exception as e:
+                print(f"Error during workflow run: {e}")
+                result_msg = f"Error: {str(e)}"
+
+            def show_results():
+                print("Workflow extracted results:", results if 'results' in locals() else 'No results')
+                QMessageBox.information(self, "Test Results", result_msg)
+                self.test_button.setEnabled(True)
+
+            print("Quitting browser...")
+            self.scraper.driver.quit()
+            self.scraper.driver = None
+            self.scraper = Scraper(self.driver_path)
+
+            self.call_in_main(show_results)
+
+        threading.Thread(target=test_thread, daemon=True).start()
+
+
+
+
+
+    def call_in_main(self, func):
+        # Utility to call a UI function from thread
+        from PySide6.QtCore import QTimer
+        QTimer.singleShot(0, func)
+
     
     def reset_app(self):
         self.url_entry.clear()

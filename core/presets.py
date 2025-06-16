@@ -2,6 +2,7 @@ import json
 import os
 
 PRESET_FILE = "presets.json"
+WORKFLOW_PATH = "workflow.json"
 
 def load_presets():
     if not os.path.exists(PRESET_FILE):
@@ -9,68 +10,38 @@ def load_presets():
     with open(PRESET_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def load_workflows():
+    with open(WORKFLOW_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
+    
+def get_fields(team, screen, tab):
+    presets = load_presets()
+    try:
+        return presets[team][screen][tab]
+    except KeyError:
+        return {}
+
 def save_presets(presets):
     with open(PRESET_FILE, "w", encoding="utf-8") as f:
         json.dump(presets, f, indent=4)
 
+def get_workflow(team, screen, tab):
+    workflows = load_workflows()
+    for wf in workflows:
+        if wf["team"] == team and wf["screen"] == screen and wf["tab"] == tab:
+            return wf["steps"]
+    return []
+
 def get_team_names():
     presets = load_presets()
-    return [preset["preset_name"] for preset in presets]
+    return list(presets.keys())
 
-def get_fields_for_team(team_name):
-    presets = load_presets()
-    for preset in presets:
-        if preset["preset_name"] == team_name:
-            return preset.get("fields", {})
-    return {}
 
-def get_table_config_for_team(team_name):
-    presets = load_presets()
-    for preset in presets:
-        if preset["preset_name"] == team_name:
-            return preset.get("table", {})
-    return {}
+def get_available_teams():
+    return list(load_presets().keys())
 
-def add_or_update_team(team_name, fields_dict, table_dict=None):
-    presets = load_presets()
-    for preset in presets:
-        if preset["preset_name"] == team_name:
-            preset["fields"] = fields_dict
-            if table_dict:
-                preset["table"] = table_dict
-            save_presets(presets)
-            return
-    # If not found, add new
-    new_preset = {
-        "preset_name": team_name,
-        "fields": fields_dict,
-        "table": table_dict or {}
-    }
-    presets.append(new_preset)
-    save_presets(presets)
+def get_screens_for_team(team):
+    return list(load_presets().get(team, {}).keys())
 
-def remove_team(team_name):
-    presets = load_presets()
-    new_presets = [preset for preset in presets if preset["preset_name"] != team_name]
-    if len(new_presets) != len(presets):
-        save_presets(new_presets)
-        return True
-    return False
-
-def update_field(team_name, field_name, css_selector):
-    presets = load_presets()
-    for preset in presets:
-        if preset["preset_name"] == team_name:
-            preset.setdefault("fields", {})[field_name] = css_selector
-            save_presets(presets)
-            return True
-    return False
-
-def remove_field(team_name, field_name):
-    presets = load_presets()
-    for preset in presets:
-        if preset["preset_name"] == team_name and field_name in preset.get("fields", {}):
-            del preset["fields"][field_name]
-            save_presets(presets)
-            return True
-    return False
+def get_tabs_for_screen(team, screen):
+    return list(load_presets().get(team, {}).get(screen, {}).keys())
