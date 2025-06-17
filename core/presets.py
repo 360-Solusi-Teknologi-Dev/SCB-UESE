@@ -45,3 +45,52 @@ def get_screens_for_team(team):
 
 def get_tabs_for_screen(team, screen):
     return list(load_presets().get(team, {}).get(screen, {}).keys())
+
+def add_or_update_preset(team, screen, tab, fields):
+    """
+    Adds or updates the preset for a specific team/screen/tab.
+    Fields is a dictionary of field_name -> {type, selector/...}
+    """
+    presets_data = load_presets()
+
+    if team not in presets_data:
+        presets_data[team] = {}
+
+    if screen not in presets_data[team]:
+        presets_data[team][screen] = {}
+
+    presets_data[team][screen][tab] = fields
+
+    save_presets(presets_data)
+
+
+def delete_tab(team, screen, tab):
+    data = load_presets()
+    try:
+        del data[team][screen][tab]
+        if not data[team][screen]:
+            del data[team][screen]
+        if not data[team]:
+            del data[team]
+        save_presets(data)
+    except KeyError:
+        pass
+
+def delete_screen(team, screen):
+    data = load_presets()
+    try:
+        del data[team][screen]
+        if not data[team]:
+            del data[team]
+        save_presets(data)
+    except KeyError:
+        pass
+
+def delete_team(team):
+    data = load_presets()
+    try:
+        del data[team]
+        save_presets(data)
+    except KeyError:
+        pass
+
