@@ -94,3 +94,14 @@ def delete_team(team):
     except KeyError:
         pass
 
+def get_all_presets():
+    """
+    Returns a flat list of (team, screen, tab) tuples for all presets.
+    """
+    presets = load_presets()
+    flat = []
+    for team, screens in presets.items():
+        for screen, tabs in screens.items():
+            for tab in tabs:
+                flat.append((team, screen, tab))
+    return flat
