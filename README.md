@@ -59,4 +59,4 @@ This will generate an executable file that includes the script and WebDriver, so
 
 ## Notes
 - Ensure that the version of `msedgedriver.exe` matches the installed Microsoft Edge version.
-- This project was tested with Python 3.x and works best when using the appropriate versions of dependencies.
+- This project was tested with Python 3.10 and works best when using the appropriate versions of dependencies.
