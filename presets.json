@@ -66,7 +66,32 @@
                     "type": "css",
                     "selector": "#datatable > tbody > tr:nth-child(3) > td.LayersLabel > nobr"
                 }
-            }
+            },
+            "income": {},
+            "personal_details": {},
+            "employment": {},
+            "friends/relative": {},
+            "internal_use": {},
+            "language": {},
+            "details_continued": {},
+            "rel_remarks": {},
+            "linked_masters": {},
+            "credit_card": {},
+            "household": {},
+            "CRA_related": {},
+            "country_CDD_details": {},
+            "FATCA_info": {},
+            "FATCA_flags": {},
+            "hobby": {},
+            "employment_history": {},
+            "linkages": {},
+            "bank_details": {},
+            "relationship_charges": {},
+            "address": {},
+            "infotype": {},
+            "CDD_details": {},
+            "contact": {},
+            "privacy_preferences": {}
         }
     }
 }

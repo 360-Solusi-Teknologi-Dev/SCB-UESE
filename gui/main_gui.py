@@ -3,6 +3,9 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QStackedWidget,
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 from gui.screens.scraping_screen import ScrapingScreen
+from gui.preset_manager import PresetManager
+from core import presets
+
 
 class MainGUIWithSidebar(QWidget):
     def __init__(self, driver_path):
@@ -35,6 +38,11 @@ class MainGUIWithSidebar(QWidget):
         btn_scrape.clicked.connect(lambda: self.stack.setCurrentWidget(self.scraping_screen))
         sidebar.addWidget(btn_scrape)
         sidebar.addStretch()
+        
+        btn_presets = QPushButton("🛠️ Manage Presets")
+        btn_presets.clicked.connect(self.open_preset_manager)
+        sidebar.addWidget(btn_presets)
+
 
         sidebar_frame = QFrame()
         sidebar_frame.setFixedWidth(200)
@@ -44,3 +52,12 @@ class MainGUIWithSidebar(QWidget):
         layout.addWidget(sidebar_frame)
         layout.addWidget(vline)
         layout.addWidget(self.stack)
+    
+    def open_preset_manager(self):
+        dlg = PresetManager(self)
+        dlg.exec()
+
+        # Optional: refresh scraping screen team combo if necessary
+        self.scraping_screen.team_combo.clear()
+        self.scraping_screen.team_combo.addItems(presets.get_team_names())
+
