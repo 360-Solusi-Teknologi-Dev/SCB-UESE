@@ -47,10 +47,24 @@
                 "Submit_btn": {
                     "type": "css",
                     "selector": "#mntbl1 > tbody > tr:nth-child(1) > td:nth-child(2) > form > table > tbody > tr:nth-child(2) > td > table > tbody > tr > td > table > tbody > tr:nth-child(4) > td > input:nth-child(1)"
-                },
-                "iframe": {
+                }
+            },
+            "details": {
+                "details_button": {
                     "type": "css",
-                    "selector": "enqframe"
+                    "selector": "#row0 > a"
+                },
+                "Salutation_Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(1) > td.LayersLabel > nobr"
+                },
+                "Suffix_Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(2) > td.LayersLabel"
+                },
+                "First_Name": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(3) > td.LayersLabel > nobr"
                 }
             }
         }
