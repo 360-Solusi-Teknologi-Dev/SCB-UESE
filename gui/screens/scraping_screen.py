@@ -77,14 +77,6 @@ class ScrapingScreen(QWidget):
         self.resume_button.clicked.connect(self.resume_scraping)
         self.reset_button.clicked.connect(self.reset_app)
 
-    def open_preset_manager(self):
-        """Open the Preset Manager."""
-        preset_manager = PresetManager(self)
-        preset_manager.exec()
-        # Reload team presets in the combo box after changes
-        self.team_combo.clear()
-        self.team_combo.addItems(presets.get_team_names())
-
     def browse_file(self):
         from PySide6.QtWidgets import QFileDialog
         file_path, _ = QFileDialog.getOpenFileName(self, "Select File", "", "All Files (*.*)")

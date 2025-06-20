@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QStackedWidget,
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 from gui.screens.scraping_screen import ScrapingScreen
+from gui.workflow_manager import WorkflowManager
 from gui.preset_manager import PresetManager
 from core import presets
 
@@ -17,7 +18,12 @@ class MainGUIWithSidebar(QWidget):
 
         # Screens
         self.scraping_screen = ScrapingScreen(driver_path)
-        self.stack.addWidget(self.scraping_screen)  # index 0
+        self.preset_manager = PresetManager()
+        self.workflow_manager = WorkflowManager()
+
+        self.stack.addWidget(self.scraping_screen)     # index 0
+        self.stack.addWidget(self.preset_manager)      # index 1
+        self.stack.addWidget(self.workflow_manager)    # index 2
 
         # Sidebar menu
         sidebar = QVBoxLayout()
@@ -40,8 +46,14 @@ class MainGUIWithSidebar(QWidget):
         sidebar.addStretch()
         
         btn_presets = QPushButton("🛠️ Manage Presets")
-        btn_presets.clicked.connect(self.open_preset_manager)
+        btn_presets.clicked.connect(lambda: self.stack.setCurrentWidget(self.preset_manager))
         sidebar.addWidget(btn_presets)
+
+        btn_workflow = QPushButton("🧩 Workflow Manager")
+        btn_workflow.clicked.connect(lambda: self.stack.setCurrentWidget(self.workflow_manager))
+        sidebar.addWidget(btn_workflow)
+
+
 
 
         sidebar_frame = QFrame()
