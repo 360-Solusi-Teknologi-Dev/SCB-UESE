@@ -39,63 +39,6 @@
     },
     "EUC Team": {
         "Customer Information": 
-        [
-            {
-                "command": "typing",
-                "target": "#relationshiptxt",
-                "value": "C"
-            },
-            {
-                "command": "click",
-                "target": "#mntbl1 > tbody > tr:nth-child(1) > td:nth-child(2) > form > table > tbody > tr:nth-child(2) > td > table > tbody > tr > td > table > tbody > tr:nth-child(4) > td > input:nth-child(1)",
-                "value": null
-            },
-            {
-                "command": "waitloading",
-                "target": null,
-                "value": null
-            },
-            {
-                "command": "click",
-                "target": "#row0 > a",
-                "value": null
-            },
-            {
-                "command": "waitloading",
-                "target": null,
-                "value": null
-            },
-            {
-                "command": "extract",
-                "target": "#datatable > tbody > tr:nth-child(1) > td.LayersLabel > nobr",
-                "value": "Salutation_Code"
-            },
-            {
-                "command": "extract",
-                "target": "#datatable > tbody > tr:nth-child(2) > td.LayersLabel",
-                "value": "Suffix_Code"
-            },
-            {
-                "command": "extract",
-                "target": "#datatable > tbody > tr:nth-child(3) > td.LayersLabel > nobr",
-                "value": "First_Name"
-            },
-            {
-                "command": "extract",
-                "target": "#datatable > tbody > tr:nth-child(5) > td.LayersLabel > nobr",
-                "value": "Last_Name"
-            }
-        ]
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         {
             "Input": {
                 "Rel ID": {
