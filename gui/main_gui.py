@@ -4,6 +4,7 @@ from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 from gui.screens.scraping_screen import ScrapingScreen
 from gui.screens.comparing_screen import ComparingScreen
+from gui.screens.mail_screen import MailGenerationScreen
 from gui.workflow_manager import WorkflowManager
 from gui.preset_manager import PresetManager
 from core import presets
@@ -20,11 +21,13 @@ class MainGUIWithSidebar(QWidget):
         # Screens
         self.scraping_screen = ScrapingScreen(driver_path)
         self.comparing_screen = ComparingScreen()
+        self.mail_screen = MailGenerationScreen()
         self.preset_manager = PresetManager()
         self.workflow_manager = WorkflowManager()
 
         self.stack.addWidget(self.scraping_screen)
-        self.stack.addWidget(self.comparing_screen)     # index 0
+        self.stack.addWidget(self.comparing_screen)
+        self.stack.addWidget(self.mail_screen)     # index 0
         self.stack.addWidget(self.preset_manager)      # index 1
         self.stack.addWidget(self.workflow_manager)    # index 2
 
@@ -52,7 +55,7 @@ class MainGUIWithSidebar(QWidget):
         sidebar.addWidget(btn_compare)
 
         btn_mail = QPushButton("🔍 Letter Generation")
-        btn_mail.clicked.connect(lambda: self.stack.setCurrentWidget(self.scraping_screen))
+        btn_mail.clicked.connect(lambda: self.stack.setCurrentWidget(self.mail_screen))
         sidebar.addWidget(btn_mail)
         sidebar.addStretch()
         

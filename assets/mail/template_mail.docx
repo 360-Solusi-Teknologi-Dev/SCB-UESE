@@ -1,0 +1,6 @@
+Kepada Yth: {{ FIRSTNAME }} {{ LASTNAME }}
+Nomor CIF: {{ CIF }}
+Nomor Telepon: {{ PHONENO }}
+
+Status Perbandingan Data: {{ STATUS }}
+Catatan: {{ STATUSMSG }}
