@@ -98,5 +98,435 @@
             "contact": {},
             "privacy_preferences": {}
         }
+    },
+
+    "ARM Team": {
+        "Master Information" : {
+            "input" : {
+                "master number" : {
+                    "type": "css",
+                    "selector": "#masternumbertxt"
+                },
+                "submit button" : {
+                    "type": "css",
+                    "selector": "#mntbl1 > tbody > tr > td:nth-child(2) > form > table > tbody > tr:nth-child(2) > td > table > tbody > tr > td > table > tbody > tr:nth-child(3) > td > input:nth-child(1)"
+                },
+                "iframe": {
+                    "type": "css",
+                    "selector": "enqframe"
+                }
+            },
+            "Account Master Tab Link" : {
+                "Relationship Number" : {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr.Dark > td:nth-child(1)"
+                },
+                "Value Full Name" : {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr.Dark > td:nth-child(2)"
+                },
+                "Value Primary Account Holde" : {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr.Dark > td:nth-child(3)"
+                }
+            },
+            "Account Master Tab Link 2" : {
+                "AccountMaster Tab" : {
+                    "type": "css",
+                    "selector": "#row1 > a"
+                },
+                "Branch Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(1) > td.LayersLabel"
+                },
+                "Entity Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(2) > td.LayersLabel"
+                },
+                "Account Type": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(3) > td.LayersLabel"
+                },
+                "Status": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(4) > td.LayersLabel"
+                },
+                "ARM Code Value": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(5) > td.LayersLabel"
+                },
+                "ARM PS ID": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(6) > td.LayersLabel"
+                },
+                "Business Unit": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(7) > td.LayersLabel"
+                },
+                "Segment Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(8) > td.LayersLabel"
+                },
+                "Customer SegmenT": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(9) > td.LayersLabel"
+                },
+                "Customer Code Effective Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(10) > td.LayersLabel"
+                },
+                "Customer Segment Code Effective Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(11) > td.LayersLabel"
+                },
+                "Customer Type Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(12) > td.LayersLabel"
+                },
+                "Inter Group": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(13) > td.LayersLabel"
+                },
+                "Ultimate Country Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(14) > td.LayersLabel"
+                },
+                "Parent Company Domicile": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(15) > td.LayersLabel"
+                },
+                "Residency Classification": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(16) > td.LayersLabel"
+                },
+                "Resident Status": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(17) > td.LayersLabel"
+                },
+                "Institution Classification": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(18) > td.LayersLabel"
+                },
+                "Institutional Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(19) > td.LayersLabel"
+                },
+                "Affiliated Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(20) > td.LayersLabel"
+                },
+                "ISIC": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(21) > td.LayersLabel"
+                },
+                "Cost Center": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(22) > td.LayersLabel"
+                },
+                "Operating Instruction": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(23) > td.LayersLabel"
+                },
+                "Expatriate Owned Company": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(24) > td.LayersLabel"
+                },
+                "Breach Of Group Policy": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(25) > td.LayersLabel"
+                },
+                "Early Alert": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(26) > td.LayersLabel"
+                },
+                "Irregular Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(27) > td.LayersLabel"
+                },
+                "IMO Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(28) > td.LayersLabel"
+                },
+                "Cluster Upliftment": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(29) > td.LayersLabel"
+                },
+                "Phone Banking": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(30) > td.LayersLabel"
+                },
+                "Borrowing Type": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(31) > td.LayersLabel"
+                },
+                "Record Status": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(32) > td.LayersLabel"
+                },
+                "Create Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(33) > td.LayersLabel"
+                },
+                "Last Checker Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(34) > td.LayersLabel"
+                },
+                "VAT Registration No": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(35) > td.LayersLabel"
+                },
+                "TAX Registration No": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(36) > td.LayersLabel"
+                },
+                "Last Contacted Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(37) > td.LayersLabel"
+                },
+                "Master Closed Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(38) > td.LayersLabel"
+                },
+                "Master Reopen Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(39) > td.LayersLabel"
+                },
+                "GST/VAT Comments": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(40) > td.LayersLabel"
+                },
+                "Comments Updated On": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(41) > td.LayersLabel"
+                },
+                "Comments Updated By": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(42) > td.LayersLabel"
+                },
+                "Cross Segment Identifier": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(43) > td.LayersLabel"
+                },
+                "Cross Segment Identifier Enable / Disable date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(44) > td.LayersLabel"
+                },
+                "Status Update Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(45) > td.LayersLabel"
+                },
+                "Master Current Status": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(46) > td.LayersLabel"
+                }
+            },
+
+            "Account Master Tab 3" : {
+                "User Defined Fields Tab" : {
+                    "type": "css",
+                    "selector": "#row3 > a"
+                },
+                "Data Not Available" : {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr > td"
+                }
+                
+            },
+            
+            "Account Master Tab 4" : {
+                "Global Static Fields Tab": {
+                    "type": "css",
+                    "selector": "#row4 > a"
+                },
+                "SCI Reference No": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(1) > td.LayersLabel"
+                },
+                "Sub Profile Id": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(2) > td.LayersLabel"
+                },
+                "Customer Legal Name": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(3) > td.LayersLabel"
+                },
+                "Arm Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(4) > td.LayersLabel"
+                },
+                "CM BANK ID": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(5) > td.LayersLabel"
+                },
+                "CM Name": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(6) > td.LayersLabel"
+                },
+                "CM Armcode": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(7) > td.LayersLabel"
+                },
+                "CM Location": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(8) > td.LayersLabel"
+                },
+                "Global Customer Segment": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(9) > td.LayersLabel"
+                },
+                "Global Customer Segment Description": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(10) > td.LayersLabel"
+                },
+                "Global Customer Sub Segment": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(11) > td.LayersLabel"
+                },
+                "Global Customer Sub Segment Description": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(12) > td.LayersLabel"
+                },
+                "Credit Risk Grade": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(13) > td.LayersLabel"
+                },
+                "Credit Risk Grade Effective Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(14) > td.LayersLabel"
+                },
+                "Isic Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(15) > td.LayersLabel"
+                },
+                "Isic Code Description": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(16) > td.LayersLabel"
+                },
+                "Ecdd Id": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(17) > td.LayersLabel"
+                },
+                "Crm Id": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(18) > td.LayersLabel"
+                },
+                "Incorporation No": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(19) > td.LayersLabel"
+                },
+                "Incorporation Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(20) > td.LayersLabel"
+                },
+                "Legal Status": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(21) > td.LayersLabel"
+                },
+                "Incorporation Country": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(22) > td.LayersLabel"
+                },
+                "CDD Risk Rating": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(23) > td.LayersLabel"
+                },
+                "CDD Review Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(24) > td.LayersLabel"
+                },
+                "GIC Country": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(25) > td.LayersLabel"
+                },
+                "GIC Risk Rating": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(26) > td.LayersLabel"
+                },
+                "GIC Review Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(27) > td.LayersLabel"
+                },
+                "BBA Country": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(28) > td.LayersLabel"
+                },
+                "BBA Risk Rating": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(29) > td.LayersLabel"
+                },
+                "BBA Review Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(30) > td.LayersLabel"
+                },
+                "SCB Affiliate Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(31) > td.LayersLabel"
+                },
+                "IFRS Counterparty Type": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(32) > td.LayersLabel"
+                },
+                "FSA Reporting Type": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(33) > td.LayersLabel"
+                },
+                "Organization Type": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(34) > td.LayersLabel"
+                },
+                "Revenue Group Name": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(35) > td.LayersLabel"
+                },
+                "Risk Group Name": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(36) > td.LayersLabel"
+                },
+                "Dodd Frank Compliance Flag": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(37) > td.LayersLabel"
+                },
+                "US Person": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(38) > td.LayersLabel"
+                },
+                "Domicile Country": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(39) > td.LayersLabel"
+                },
+                "CDD Approval Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(40) > td.LayersLabel"
+                },
+                "GIC Approval Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(41) > td.LayersLabel"
+                },
+                "BBA Approval Date": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(42) > td.LayersLabel"
+                },
+                "SCILEID Status": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(43) > td.LayersLabel"
+                }
+            },
+
+            "Account Master Tab 5" : {
+                "SCI FATCA Doc/TAX ID Type Tab": {
+                    "type": "css",
+                    "selector": "#row5 > a"
+                },
+                "Data Not Available (1)": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(1) > td"
+                },
+                "Data Not Available (2)": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(2) > td"
+                }
+            }
+
+        }
     }
 }
