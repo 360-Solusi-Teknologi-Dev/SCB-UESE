@@ -38,7 +38,8 @@
         }
     },
     "EUC Team": {
-        "Customer Information": {
+        "Customer Information": 
+        {
             "Input": {
                 "Rel ID": {
                     "type": "css",
@@ -47,12 +48,55 @@
                 "Submit_btn": {
                     "type": "css",
                     "selector": "#mntbl1 > tbody > tr:nth-child(1) > td:nth-child(2) > form > table > tbody > tr:nth-child(2) > td > table > tbody > tr > td > table > tbody > tr:nth-child(4) > td > input:nth-child(1)"
-                },
-                "iframe": {
-                    "type": "css",
-                    "selector": "enqframe"
                 }
-            }
+            },
+            "details": {
+                "details_button": {
+                    "type": "css",
+                    "selector": "#row0 > a"
+                },
+                "Salutation_Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(1) > td.LayersLabel > nobr"
+                },
+                "Suffix_Code": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(2) > td.LayersLabel"
+                },
+                "First_Name": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(3) > td.LayersLabel > nobr"
+                },
+                "Last_Name": {
+                    "type": "css",
+                    "selector": "#datatable > tbody > tr:nth-child(5) > td.LayersLabel > nobr"
+                }
+            },
+            "income": {},
+            "personal_details": {},
+            "employment": {},
+            "friends/relative": {},
+            "internal_use": {},
+            "language": {},
+            "details_continued": {},
+            "rel_remarks": {},
+            "linked_masters": {},
+            "credit_card": {},
+            "household": {},
+            "CRA_related": {},
+            "country_CDD_details": {},
+            "FATCA_info": {},
+            "FATCA_flags": {},
+            "hobby": {},
+            "employment_history": {},
+            "linkages": {},
+            "bank_details": {},
+            "relationship_charges": {},
+            "address": {},
+            "infotype": {},
+            "CDD_details": {},
+            "contact": {},
+            "privacy_preferences": {}
         }
     }
 }

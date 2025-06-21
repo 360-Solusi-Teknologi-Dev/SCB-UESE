@@ -6,7 +6,6 @@ from PySide6.QtGui import QIcon
 from PySide6.QtCore import Signal
 from core.scraper import Scraper
 from core import presets
-from gui.preset_manager import PresetManager
 import threading
 
 class ScrapingScreen(QWidget):
@@ -22,16 +21,6 @@ class ScrapingScreen(QWidget):
     def init_ui(self):
         self.setWindowTitle("Enquiry Scraper")
         self.setMaximumHeight(350)  # Slight limit to avoid extra vertical space
-
-        # === TOP RIGHT SETTINGS BUTTON ===
-        self.settings_button = QToolButton()
-        self.settings_button.setIcon(QIcon("settings.png"))  # Path to cog icon
-        self.settings_button.setToolTip("Manage Presets")
-        self.settings_button.clicked.connect(self.open_preset_manager)
-
-        top_bar = QHBoxLayout()
-        top_bar.addStretch()
-        top_bar.addWidget(self.settings_button)
 
         # === FORM INPUTS ===
         self.url_entry = QLineEdit()
@@ -78,7 +67,6 @@ class ScrapingScreen(QWidget):
 
         # === MAIN LAYOUT ===
         main_layout = QVBoxLayout()
-        main_layout.addLayout(top_bar)
         main_layout.addWidget(input_group)
         main_layout.addLayout(button_layout)
         main_layout.addSpacerItem(QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding))  # Pushes UI up
@@ -88,14 +76,6 @@ class ScrapingScreen(QWidget):
         self.start_button.clicked.connect(self.start_browser)
         self.resume_button.clicked.connect(self.resume_scraping)
         self.reset_button.clicked.connect(self.reset_app)
-
-    def open_preset_manager(self):
-        """Open the Preset Manager."""
-        preset_manager = PresetManager(self)
-        preset_manager.exec()
-        # Reload team presets in the combo box after changes
-        self.team_combo.clear()
-        self.team_combo.addItems(presets.get_team_names())
 
     def browse_file(self):
         from PySide6.QtWidgets import QFileDialog

@@ -2,13 +2,14 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
     QMessageBox, QComboBox, QFormLayout, QDialogButtonBox,
-    QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,QTreeWidget, QTreeWidgetItem
+    QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,QTreeWidget, QTreeWidgetItem,QTabWidget
 )
 
 
 
 from core import presets  # Import the presets module for managing preset data
 
+# Preset Manager Dialog
 class PresetManager(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -107,12 +108,11 @@ class PresetManager(QDialog):
         if form.exec() == QDialog.Accepted:
             data = form.get_data()
             if not data:
-                return  # Validation failed in form
+                return
 
             team = data["team"]
             screen = data["screen"]
-            tab = data["tab"]
-            fields = data["fields"]
+            tab_fields = data["fields"]  # {tab_name: field_dict}
 
             all_presets = presets.load_presets()
 
@@ -120,96 +120,133 @@ class PresetManager(QDialog):
                 all_presets[team] = {}
             if screen not in all_presets[team]:
                 all_presets[team][screen] = {}
-            if tab in all_presets[team][screen]:
-                QMessageBox.warning(self, "Preset Exists", f"{team} > {screen} > {tab} already exists.")
-                return
 
-            all_presets[team][screen][tab] = fields
+            duplicate_tabs = []
+            for tab, fields in tab_fields.items():
+                if tab in all_presets[team][screen]:
+                    duplicate_tabs.append(tab)
+                else:
+                    all_presets[team][screen][tab] = fields
+
+            if duplicate_tabs:
+                QMessageBox.warning(self, "Duplicate Tabs",
+                                    f"The following tabs already exist and were skipped: {', '.join(duplicate_tabs)}")
+
             presets.save_presets(all_presets)
             self.load_presets()
-            QMessageBox.information(self, "Success", f"Preset for {team} > {screen} > {tab} added.")
+            QMessageBox.information(self, "Success", f"Preset(s) added to {team} > {screen}")
+
 
 
     
     def edit_preset(self):
         item = self.preset_tree.currentItem()
-        if not item or not item.parent() or not item.parent().parent():
-            QMessageBox.warning(self, "Selection Error", "Please select a tab to edit.")
+        if not item:
+            QMessageBox.warning(self, "Selection Error", "Please select a team, screen, or tab.")
             return
 
-        tab = item.text(0)
-        screen = item.parent().text(0)
-        team = item.parent().parent().text(0)
+        # Determine what level was clicked
+        if item.parent() and item.parent().parent():
+            # Tab level
+            tab = item.text(0)
+            screen = item.parent().text(0)
+            team = item.parent().parent().text(0)
+        elif item.parent():
+            # Screen level
+            tab = None
+            screen = item.text(0)
+            team = item.parent().text(0)
+        else:
+            QMessageBox.warning(self, "Selection Error", "Please select at least a screen under a team.")
+            return
 
-        existing_fields = presets.get_fields(team, screen, tab)
+        all_presets = presets.load_presets()
+        existing_tabs = all_presets.get(team, {}).get(screen, {})
+
+        if not existing_tabs:
+            QMessageBox.warning(self, "Not Found", f"No tabs found under {team} > {screen}")
+            return
 
         form = PresetForm(self)
         form.team_input.setText(team)
         form.screen_input.setText(screen)
-        form.tab_input.setText(tab)
         form.team_input.setDisabled(True)
         form.screen_input.setDisabled(True)
-        form.tab_input.setDisabled(True)
 
-        # Load existing fields
-        for name, data in existing_fields.items():
-            row = form.fields_table.rowCount()
-            form.fields_table.insertRow(row)
-            form.fields_table.setItem(row, 0, QTableWidgetItem(name))
-            form.fields_table.setItem(row, 1, QTableWidgetItem(data.get("type", "")))
+        # Load all tabs into form
+        form.tab_widget.clear()
+        for tab_name, fields in existing_tabs.items():
+            table = QTableWidget(0, 3)
+            table.setHorizontalHeaderLabels(["Field Name", "Type", "Selector"])
+            table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+            table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+            table.setSelectionBehavior(QAbstractItemView.SelectRows)
 
-            if data.get("type") == "css":
-                selector = data.get("selector", "")
-            elif data.get("type") == "table_lookup":
-                selector = f"{data.get('table_id', '')} | {data.get('label', '')}"
-            else:
-                selector = ""
+            for name, data in fields.items():
+                if name == "iframe":
+                    continue
+                row = table.rowCount()
+                table.insertRow(row)
+                table.setItem(row, 0, QTableWidgetItem(name))
+                table.setItem(row, 1, QTableWidgetItem(data.get("type", "")))
 
-            form.fields_table.setItem(row, 2, QTableWidgetItem(selector))
+                if data.get("type") == "css":
+                    selector = data.get("selector", "")
+                elif data.get("type") == "table_lookup":
+                    selector = f"{data.get('table_id', '')} | {data.get('label', '')}"
+                else:
+                    selector = ""
+                table.setItem(row, 2, QTableWidgetItem(selector))
+
+            form.tab_widget.addTab(table, tab_name)
 
         if form.exec() == QDialog.Accepted:
             data = form.get_data()
-            if data is None:
+            if not data:
                 return
 
-            # Save updated fields
-            presets.add_or_update_fields(team, screen, tab, data["fields"])
-            QMessageBox.information(self, "Success", f"Preset updated for {team} > {screen} > {tab}")
+            new_tabs = data["fields"]
+            all_presets[team][screen] = new_tabs
+            presets.save_presets(all_presets)
+
             self.load_presets()
+            QMessageBox.information(self, "Success", f"Preset updated for {team} > {screen}")
+
 
         
     def delete_preset(self):
         QMessageBox.information(self, "Not Implemented", "Deleting presets will be implemented next.")
 
-
-
-
-
+# Preset Form for adding/editing presets
 class PresetForm(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Preset Form")
-        self.setMinimumSize(600, 500)
+        self.setMinimumSize(700, 550)
 
         self.team_input = QLineEdit()
         self.screen_input = QLineEdit()
-        self.tab_input = QLineEdit()
         self.iframe_selector_input = QLineEdit()
 
         form_layout = QFormLayout()
         form_layout.addRow("Team:", self.team_input)
         form_layout.addRow("Screen:", self.screen_input)
-        form_layout.addRow("Tab:", self.tab_input)
         form_layout.addRow("Iframe Selector (optional):", self.iframe_selector_input)
 
-        # Field Table
-        self.fields_table = QTableWidget(0, 3)
-        self.fields_table.setHorizontalHeaderLabels(["Field Name", "Type", "Selector"])
-        self.fields_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.fields_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.fields_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        # Tab Widget for Tabs (each with its own field table)
+        self.tab_widget = QTabWidget()
 
-        # Field buttons
+        self.add_tab_button = QPushButton("Add Tab")
+        self.remove_tab_button = QPushButton("Remove Tab")
+
+        tab_button_layout = QHBoxLayout()
+        tab_button_layout.addWidget(self.add_tab_button)
+        tab_button_layout.addWidget(self.remove_tab_button)
+
+        self.add_tab_button.clicked.connect(self.add_tab)
+        self.remove_tab_button.clicked.connect(self.remove_selected_tab)
+
+        # Field Buttons
         self.add_field_button = QPushButton("Add Field")
         self.edit_field_button = QPushButton("Edit Selected")
         self.remove_field_button = QPushButton("Remove Selected")
@@ -228,18 +265,48 @@ class PresetForm(QDialog):
         self.button_box.accepted.connect(self.accept)
         self.button_box.rejected.connect(self.reject)
 
-        # Assemble layout
+        # Layout
         layout = QVBoxLayout()
         layout.addLayout(form_layout)
-        layout.addWidget(QLabel("Fields:"))
-        layout.addWidget(self.fields_table)
+        layout.addWidget(QLabel("Tabs & Fields:"))
+        layout.addWidget(self.tab_widget)
+        layout.addLayout(tab_button_layout)
         layout.addLayout(field_buttons_layout)
         layout.addWidget(self.button_box)
 
         self.setLayout(layout)
 
+    def add_tab(self):
+        from PySide6.QtWidgets import QInputDialog
+
+        tab_name, ok = QInputDialog.getText(self, "Add Tab", "Tab name:")
+        if ok and tab_name:
+            for i in range(self.tab_widget.count()):
+                if self.tab_widget.tabText(i) == tab_name:
+                    QMessageBox.warning(self, "Duplicate", "Tab name already exists.")
+                    return
+            table = QTableWidget(0, 3)
+            table.setHorizontalHeaderLabels(["Field Name", "Type", "Selector"])
+            table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+            table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+            table.setSelectionBehavior(QAbstractItemView.SelectRows)
+            self.tab_widget.addTab(table, tab_name)
+
+    def remove_selected_tab(self):
+        index = self.tab_widget.currentIndex()
+        if index >= 0:
+            self.tab_widget.removeTab(index)
+
+    def get_current_table(self):
+        return self.tab_widget.currentWidget()
+
     def add_field(self):
         from PySide6.QtWidgets import QDialog, QFormLayout, QDialogButtonBox
+
+        table = self.get_current_table()
+        if not table:
+            QMessageBox.warning(self, "No Tab", "Please create/select a tab first.")
+            return
 
         dialog = QDialog(self)
         dialog.setWindowTitle("Add Field")
@@ -269,17 +336,17 @@ class PresetForm(QDialog):
                 QMessageBox.warning(dialog, "Input Error", "Field name and selector are required.")
                 return
 
-            # Duplicate field name check
-            for r in range(self.fields_table.rowCount()):
-                if self.fields_table.item(r, 0).text() == name:
+            # Check for duplicate
+            for r in range(table.rowCount()):
+                if table.item(r, 0).text() == name:
                     QMessageBox.warning(dialog, "Duplicate Field", f"Field '{name}' already exists.")
                     return
 
-            row = self.fields_table.rowCount()
-            self.fields_table.insertRow(row)
-            self.fields_table.setItem(row, 0, QTableWidgetItem(name))
-            self.fields_table.setItem(row, 1, QTableWidgetItem(type_))
-            self.fields_table.setItem(row, 2, QTableWidgetItem(
+            row = table.rowCount()
+            table.insertRow(row)
+            table.setItem(row, 0, QTableWidgetItem(name))
+            table.setItem(row, 1, QTableWidgetItem(type_))
+            table.setItem(row, 2, QTableWidgetItem(
                 selector if type_ == "css" else f"{selector} | {label}"
             ))
 
@@ -287,27 +354,28 @@ class PresetForm(QDialog):
 
         buttons.accepted.connect(accept)
         buttons.rejected.connect(dialog.reject)
-
         dialog.exec()
 
-
     def edit_selected_field(self):
-        selected = self.fields_table.currentRow()
+        table = self.get_current_table()
+        if not table:
+            QMessageBox.warning(self, "No Tab", "Please select a tab first.")
+            return
+
+        selected = table.currentRow()
         if selected < 0:
             QMessageBox.warning(self, "Selection Error", "Please select a field to edit.")
             return
 
-        name = self.fields_table.item(selected, 0).text()
-        type_ = self.fields_table.item(selected, 1).text()
-        raw_selector = self.fields_table.item(selected, 2).text()
+        name = table.item(selected, 0).text()
+        type_ = table.item(selected, 1).text()
+        raw_selector = table.item(selected, 2).text()
 
         selector = raw_selector
         label = ""
-
         if type_ == "table_lookup" and " | " in raw_selector:
             selector, label = raw_selector.split(" | ", 1)
 
-        # Reuse add dialog but prefill
         dialog = QDialog(self)
         dialog.setWindowTitle("Edit Field")
         layout = QFormLayout(dialog)
@@ -337,10 +405,11 @@ class PresetForm(QDialog):
                 QMessageBox.warning(dialog, "Input Error", "Field name and selector are required.")
                 return
 
-            self.fields_table.setItem(selected, 0, QTableWidgetItem(new_name))
-            self.fields_table.setItem(selected, 1, QTableWidgetItem(new_type))
-            sel_value = new_selector if new_type == "css" else f"{new_selector} | {new_label}"
-            self.fields_table.setItem(selected, 2, QTableWidgetItem(sel_value))
+            table.setItem(selected, 0, QTableWidgetItem(new_name))
+            table.setItem(selected, 1, QTableWidgetItem(new_type))
+            table.setItem(selected, 2, QTableWidgetItem(
+                new_selector if new_type == "css" else f"{new_selector} | {new_label}"
+            ))
 
             dialog.accept()
 
@@ -349,42 +418,55 @@ class PresetForm(QDialog):
         dialog.exec()
 
     def remove_selected_field(self):
-        selected = self.fields_table.currentRow()
-        if selected >= 0:
-            self.fields_table.removeRow(selected)
+        table = self.get_current_table()
+        if table:
+            selected = table.currentRow()
+            if selected >= 0:
+                table.removeRow(selected)
 
     def get_data(self):
-        """Return all entered data in JSON-compatible format."""
+        """Return all data in JSON-compatible format."""
         team = self.team_input.text().strip()
         screen = self.screen_input.text().strip()
-        tab = self.tab_input.text().strip()
         iframe_selector = self.iframe_selector_input.text().strip()
 
-        if not team or not screen or not tab:
-            QMessageBox.warning(self, "Input Error", "Team, Screen, and Tab are required.")
+        if not team or not screen:
+            QMessageBox.warning(self, "Input Error", "Team and Screen are required.")
+            return None
+        
+        if self.tab_widget.count() == 0:
+            QMessageBox.warning(self, "Missing Tab", "Please add at least one tab before saving.")
             return None
 
-        fields = {}
-        for row in range(self.fields_table.rowCount()):
-            name = self.fields_table.item(row, 0).text()
-            type_ = self.fields_table.item(row, 1).text()
-            raw = self.fields_table.item(row, 2).text()
 
-            if type_ == "css":
-                fields[name] = {"type": "css", "selector": raw}
-            elif type_ == "table_lookup":
-                if " | " in raw:
-                    table_id, label = raw.split(" | ", 1)
-                else:
-                    table_id, label = raw, ""
-                fields[name] = {"type": "table_lookup", "table_id": table_id, "label": label}
-
-        if iframe_selector:
-            fields["iframe"] = {"type": "css", "selector": iframe_selector}
-
-        return {
+        result = {
             "team": team,
             "screen": screen,
-            "tab": tab,
-            "fields": fields
+            "fields": {},  # tab name => fields dict
         }
+
+        for i in range(self.tab_widget.count()):
+            tab_name = self.tab_widget.tabText(i)
+            table = self.tab_widget.widget(i)
+
+            tab_fields = {}
+            for row in range(table.rowCount()):
+                name = table.item(row, 0).text()
+                type_ = table.item(row, 1).text()
+                raw = table.item(row, 2).text()
+
+                if type_ == "css":
+                    tab_fields[name] = {"type": "css", "selector": raw}
+                elif type_ == "table_lookup":
+                    if " | " in raw:
+                        table_id, label = raw.split(" | ", 1)
+                    else:
+                        table_id, label = raw, ""
+                    tab_fields[name] = {"type": "table_lookup", "table_id": table_id, "label": label}
+
+            if iframe_selector:
+                tab_fields["iframe"] = {"type": "css", "selector": iframe_selector}
+
+            result["fields"][tab_name] = tab_fields
+
+        return result
