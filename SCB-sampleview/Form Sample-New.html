@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Client Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+    }
+
+    .container {
+      width: 900px;
+      margin: 30px auto;
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .info-header div {
+      margin-bottom: 5px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .tabs button {
+      background: #0073e6;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      margin: 2px;
+      cursor: pointer;
+    }
+
+    .tabs button.active,
+    .tabs button:hover {
+      background: #005bb5;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: flex;
+      font-size: 14px;
+    }
+
+    .details-labels,
+    .details-values {
+      background: #e6f4ff;
+      padding: 10px;
+    }
+
+    .details-labels {
+      width: 250px;
+      border-right: 1px solid #ccc;
+    }
+
+    .details-values {
+      flex: 1;
+      background: #f0f8ff;
+    }
+
+    .row {
+      padding: 6px 4px;
+      border-bottom: 1px solid #d1e7f7;
+    }
+
+    .highlight {
+      border: 2px solid red;
+      padding: 2px;
+      background: #e6f4ff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <table border="1" cellpadding="4" cellspacing="0">
+      <tr>
+        <td><strong>Relationship No.</strong></td>
+        <td>01|12482999</td>
+        <td><strong>Relationship Type</strong></td>
+        <td>Individual</td>
+        <td><strong>ICM ID</strong></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td><strong>Relationship Status</strong></td>
+        <td>Active</td>
+        <td><strong>Date Of Opening</strong></td>
+        <td>19/06/2025</td>
+        <td><strong>Profile Type</strong></td>
+        <td>Client</td>
+      </tr>
+    </table>
+    </br>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="active" onclick="showTab('details')">Details</button>
+      <button onclick="showTab('personal')">Personal Details</button>
+    </div>
+
+    <!-- Tab Content: Details -->
+    <div id="details" class="tab-content active">
+      <div class="details-labels">
+        <div class="row">Salutation Code</div>
+        <div class="row">Suffix Code</div>
+        <div class="row">First Name</div>
+        <div class="row">Middle Name</div>
+        <div class="row">Last Name</div>
+        <div class="row">Full Name</div>
+        <div class="row">Preferred Card Name</div>
+        <div class="row">Constitution Code</div>
+        <div class="row">Gender</div>
+        <div class="row">Place Of Birth</div>
+        <div class="row">Date Of Birth</div>
+        <div class="row">Nationality Code</div>
+        <div class="row">Staff Category</div>
+        <div class="row">Domicile Country</div>
+      </div>
+      <div class="details-values">
+        <div class="row">Mr.</div>
+        <div class="row">-</div>
+        <div class="row">Joko</div>
+        <div class="row">-</div>
+        <div class="row">Santoso</div>
+        <div class="row">Pak Joko Santoso</div>
+        <div class="row">Pak Joko</div>
+        <div class="row">IDN</div>
+        <div class="row">Male</div>
+        <div class="row">Surabaya</div>
+        <div class="row">01/01/1980</div>
+        <div class="row">ID</div>
+        <div class="row">General Staff</div>
+        <div class="row">Indonesia</div>
+      </div>
+    </div>
+
+    <!-- Tab Content: Personal Details -->
+    <div id="personal" class="tab-content">
+      <div class="details-labels">
+        <div class="row">Marital Status</div>
+        <div class="row">Spouse Name</div>
+        <div class="row">Number of Children</div>
+        <div class="row">Religion</div>
+        <div class="row">Education</div>
+        <div class="row">Occupation</div>
+        <div class="row">Employer</div>
+        <div class="row">Annual Income</div>
+        <div class="row">Phone Number</div>
+        <div class="row">Email Address</div>
+        <div class="row">Nationality</div>
+        <div class="row">Language Spoken</div>
+        <div class="row">Hobby</div>
+        <div class="row">Notes</div>
+      </div>
+
+      <div class="details-values">
+        <div class="row">Married</div>
+        <div class="row">Ibu Sari</div>
+        <div class="row">2</div>
+        <div class="row">Islam</div>
+        <div class="row">Bachelor's Degree</div>
+        <div class="row">Software Engineer</div>
+        <div class="row">PT Teknologi Nusantara</div>
+        <div class="row">Rp120.000.000</div>
+        <div class="row">081234567890</div>
+        <div class="row">joko.santoso@email.com</div>
+        <div class="row">Indonesian</div>
+        <div class="row">Bahasa Indonesia, English</div>
+        <div class="row">Fishing, Reading</div>
+        <div class="row">-</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script: Tab Switch -->
+  <script>
+    function showTab(tabId) {
+      // Sembunyikan semua tab
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.remove('active'));
+
+      // Tampilkan tab yang dipilih
+      document.getElementById(tabId).classList.add('active');
+
+      // Atur tombol aktif
+      const buttons = document.querySelectorAll('.tabs button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+
+</html>

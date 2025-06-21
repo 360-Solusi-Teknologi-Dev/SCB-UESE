@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Client Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 24px;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      margin-right: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h2>ATM Inqury Screen</h2>
+    <form onsubmit="submitForm(event)">
+      <div class="form-group">
+        <label for="currencycodetxt">Currency</label>
+        <input type="text" id="currencycodetxt" name="currencycodetxt" />
+      </div>
+
+      <div class="form-group">
+        <label for="accountnumbertxt">Account Number</label>
+        <input type="text" id="accountnumbertxt" name="accountnumbertxt" />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+
+    function submitForm(event) {
+      event.preventDefault(); // mencegah reload halaman
+
+      const currency = document.getElementById('currencycodetxt').value;
+      const accountNumber = document.getElementById('accountnumbertxt').value;
+
+        localStorage.setItem('currency', currency);
+        localStorage.setItem('accountNumber', accountNumber);
+        window.location.href = "atm_screen2.html";
+
+    }
+
+  </script>
+</body>
+
+</html>

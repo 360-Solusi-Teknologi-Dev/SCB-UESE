@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ATM Screen</title>
+  <style>
+      body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f8f8f8;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #fafafa;
+    }
+    
+
+    .header-info {
+      display: flex;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+     .header-info,
+    .header-value {
+      padding: 10px;
+    }
+    .header-labels {
+      width: 250px;
+      border-right: 1px solid #ccc;
+    }
+     .row {
+      padding: 6px 4px;
+      border-bottom: 1px solid #d1e7f7;
+    }
+
+    .header-value {
+      flex: 1;
+      background: #f0f8ff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header-info">
+    <div class="header-labels">
+      <div class="row">Account Number</div>
+      <div class="row">Currency</div>
+    </div>
+    <div class="header-values">
+        <div id="accountNumberId" class="row"></div>
+        <div id="currencyId" class="row"></div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Card No</th>
+        <th>Card Seq No</th>
+        <th>CCY</th>
+        <th>Account No</th>
+        <th>Card Name</th>
+        <th>Card Status</th>
+        <th>Record Status</th>
+        <th>Withdrawal Limit</th>
+        <th>Card Expiry Date</th>
+        <th>Card Type</th>
+        <th>Account Short Name</th>
+        <th>Maker Id</th>
+        <th>Maker Date</th>
+        <th>Maker Time</th>
+        <th>Relationship No</th>
+        <th>Card Activation Date</th>
+        <th>Card Channel ID</th>
+        <th>Card Activation Time</th>
+        <th>Overseas Activation/Deactivation Status</th>
+        <th>Overseas Activation Date</th>
+        <th>Overseas Activation Time</th>
+        <th>Overseas Activation Channel ID</th>
+        <th>Overseas Deactivation Date</th>
+        <th>Overseas Deactivation Time</th>
+        <th>Overseas Deactivation Channel ID</th>
+        <th>Next Charge Apply Date</th>
+        <th>Renewal Expiry Date</th>
+        <th>Renewal Card Status</th>
+        <th>Re Issue Date</th>
+        <th>Card Transacted</th>
+        <th>Overseas StartDate</th>
+        <th>Overseas EndDate</th>
+        <th>Related Relationship No</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+      </tr>
+    </tbody>
+  </table>
+  <!-- Data Table -->
+
+
+</body>
+
+<script>
+  const currency = localStorage.getItem('currency');
+  const accountNumber = localStorage.getItem('accountNumber');
+
+  document.getElementById('accountNumberId').textContent = accountNumber;
+  document.getElementById('currencyId').textContent = currency;
+
+  const sampleData = [
+  {
+    accountNumber: "123456",
+    currency: "IDR",
+    cardNo: "1234567890",
+    cardSeqNo: "001",
+    ccy: "IDR",
+    cardName: "John Doe",
+    cardStatus: "Active",
+    recordStatus: "Valid",
+    withdrawalLimit: "10,000",
+    cardExpiryDate: "12/2026",
+    cardType: "Visa",
+    accountShortName: "J. Doe",
+    makerId: "mk123",
+    makerDate: "2024-06-20",
+    makerTime: "15:30",
+    relationshipNo: "REL0001",
+    cardActivationDate: "2024-01-01",
+    cardChannelId: "WEB",
+    cardActivationTime: "08:00",
+    overseasStatus: "Activated",
+    overseasActivationDate: "2024-01-01",
+    overseasActivationTime: "08:00",
+    overseasActivationChannelId: "WEB",
+    overseasDeactivationDate: "2024-01-31",
+    overseasDeactivationTime: "09:00",
+    overseasDeactivationChannelId: "WEB",
+    nextChargeApplyDate: "2025-01-01",
+    renewalExpiryDate: "2026-12-31",
+    renewalCardStatus: "Renewed",
+    reIssueDate: "2025-06-01",
+    cardTransacted: "Yes",
+    overseasStartDate: "2025-02-01",
+    overseasEndDate: "2025-05-01",
+    relatedRelationshipNo: "REL0001B"
+  },
+
+  {
+    accountNumber: "1234567",
+    currency: "IDR",
+    cardNo: "123456789099",
+    cardSeqNo: "001",
+    ccy: "IDR",
+    cardName: "John Doe",
+    cardStatus: "Active",
+    recordStatus: "Valid",
+    withdrawalLimit: "10,000",
+    cardExpiryDate: "12/2026",
+    cardType: "Visa",
+    accountShortName: "J. Doe",
+    makerId: "mk123",
+    makerDate: "2024-06-20",
+    makerTime: "15:30",
+    relationshipNo: "REL0001",
+    cardActivationDate: "2024-01-01",
+    cardChannelId: "WEB",
+    cardActivationTime: "08:00",
+    overseasStatus: "Activated",
+    overseasActivationDate: "2024-01-01",
+    overseasActivationTime: "08:00",
+    overseasActivationChannelId: "WEB",
+    overseasDeactivationDate: "2024-01-31",
+    overseasDeactivationTime: "09:00",
+    overseasDeactivationChannelId: "WEB",
+    nextChargeApplyDate: "2025-01-01",
+    renewalExpiryDate: "2026-12-31",
+    renewalCardStatus: "Renewed",
+    reIssueDate: "2025-06-01",
+    cardTransacted: "Yes",
+    overseasStartDate: "2025-02-01",
+    overseasEndDate: "2025-05-01",
+    relatedRelationshipNo: "REL0001B"
+  }
+];
+
+   const data = sampleData.find(d =>
+    d.accountNumber === accountNumber && d.currency === currency
+  );
+
+if (data) {
+    const row = document.createElement("tr");
+
+    const columns = [
+      'cardNo', 'cardSeqNo', 'ccy', 'accountNumber', 'cardName', 'cardStatus',
+      'recordStatus', 'withdrawalLimit', 'cardExpiryDate', 'cardType', 'accountShortName',
+      'makerId', 'makerDate', 'makerTime', 'relationshipNo', 'cardActivationDate',
+      'cardChannelId', 'cardActivationTime', 'overseasStatus', 'overseasActivationDate',
+      'overseasActivationTime', 'overseasActivationChannelId', 'overseasDeactivationDate',
+      'overseasDeactivationTime', 'overseasDeactivationChannelId', 'nextChargeApplyDate',
+      'renewalExpiryDate', 'renewalCardStatus', 'reIssueDate', 'cardTransacted',
+      'overseasStartDate', 'overseasEndDate', 'relatedRelationshipNo'
+    ];
+
+    columns.forEach(col => {
+      const td = document.createElement("td");
+      td.textContent = data[col] || '-';
+      row.appendChild(td);
+    });
+
+    document.querySelector("tbody").appendChild(row);
+  } else {
+    alert("Data tidak ditemukan untuk Account Number dan Currency tersebut.");
+  }
+</script>
+
+</html>
